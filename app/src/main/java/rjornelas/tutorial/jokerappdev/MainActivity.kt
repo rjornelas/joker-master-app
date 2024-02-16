@@ -1,4 +1,4 @@
-package co.tiagoaguiar.tutorial.jokerappdev
+package rjornelas.tutorial.jokerappdev
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

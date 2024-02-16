@@ -1,4 +1,4 @@
-package co.tiagoaguiar.tutorial.jokerappdev
+package rjornelas.tutorial.jokerappdev
 
 import org.junit.Test
 
