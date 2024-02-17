@@ -1,21 +1,22 @@
 package rjornelas.tutorial.jokerappdev.presentation
 
-import android.os.Handler
-import android.os.Looper
 import rjornelas.tutorial.jokerappdev.HomeFragment
+import rjornelas.tutorial.jokerappdev.data.CategoryRemoteDataSource
+import rjornelas.tutorial.jokerappdev.data.ListCategoryCallBack
 import rjornelas.tutorial.jokerappdev.model.Category
 import rjornelas.tutorial.jokerappdev.view.CategoryItem
 
 class HomePresenter(
-    private val view: HomeFragment
-) {
+    private val view: HomeFragment,
+    private val dataSource: CategoryRemoteDataSource
+): ListCategoryCallBack {
 
     fun findAllCategories() {
         view.showProgress()
-        fakeRequest()
+        dataSource.findAllCategories(this)
     }
 
-    private fun onSuccess(response: List<Category>) {
+    override fun onSuccess(response: List<Category>) {
 //        -> Modo mais "manual"
 //        val categories = mutableListOf<CategoryItem>()
 //
@@ -34,17 +35,7 @@ class HomePresenter(
         view.showCategories(categories)
     }
 
-    private fun onComplete(){
+    override fun onComplete() {
         view.hideProgress()
-    }
-
-    private fun fakeRequest() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            val response = arrayListOf(
-                Category("Categoria 1", 0xFFFF0000)
-            )
-            onSuccess(response)
-            onComplete()
-        }, 2000)
     }
 }
