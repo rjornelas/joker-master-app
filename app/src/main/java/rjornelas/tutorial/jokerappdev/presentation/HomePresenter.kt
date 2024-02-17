@@ -1,5 +1,6 @@
 package rjornelas.tutorial.jokerappdev.presentation
 
+import android.graphics.Color
 import android.widget.Toast
 import rjornelas.tutorial.jokerappdev.HomeFragment
 import rjornelas.tutorial.jokerappdev.data.CategoryRemoteDataSource
@@ -10,7 +11,7 @@ import rjornelas.tutorial.jokerappdev.view.CategoryItem
 class HomePresenter(
     private val view: HomeFragment,
     private val dataSource: CategoryRemoteDataSource
-): ListCategoryCallBack {
+) : ListCategoryCallBack {
 
     fun findAllCategories() {
         view.showProgress()
@@ -18,7 +19,19 @@ class HomePresenter(
     }
 
     override fun onSuccess(response: List<String>) {
-        val categories = response.map {Category(it, 0xFFFF0000)}
+        val start = 40
+        val end = 190
+        val diff = (end - start) / response.size
+
+        val categories = response.mapIndexed { index, name ->
+            val hsv = floatArrayOf(
+                start + (diff * index).toFloat(),
+                100.0f,
+                100.0f
+            )
+            Category(name, Color.HSVToColor(hsv).toLong())
+        }
+
         view.showCategories(categories)
     }
 
