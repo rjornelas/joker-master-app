@@ -4,15 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieAdapter
-import rjornelas.tutorial.jokerappdev.model.Category
+import rjornelas.tutorial.jokerappdev.presentation.HomePresenter
 import rjornelas.tutorial.jokerappdev.view.CategoryItem
 
 class HomeFragment : Fragment() {
+
+    private lateinit var presenter: HomePresenter
+    private val adapter = GroupieAdapter()
+    private lateinit var progressBar: ProgressBar
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        presenter = HomePresenter(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,15 +35,26 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressBar = view.findViewById(R.id.progress_bar)
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_main)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val adapter = GroupieAdapter()
+        presenter.findAllCategories()
+
         recyclerView.adapter = adapter
+    }
 
-        adapter.add(CategoryItem(Category("Categoria 1", 0xFFFF0000)))
-
+    fun showCategories(categories: List<CategoryItem>) {
+        adapter.addAll(categories)
         adapter.notifyDataSetChanged()
+    }
 
+    fun showProgress() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideProgress() {
+        progressBar.visibility = View.GONE
     }
 }
