@@ -1,5 +1,6 @@
 package rjornelas.tutorial.jokerappdev.presentation
 
+import android.widget.Toast
 import rjornelas.tutorial.jokerappdev.HomeFragment
 import rjornelas.tutorial.jokerappdev.data.CategoryRemoteDataSource
 import rjornelas.tutorial.jokerappdev.data.ListCategoryCallBack
@@ -16,23 +17,13 @@ class HomePresenter(
         dataSource.findAllCategories(this)
     }
 
-    override fun onSuccess(response: List<Category>) {
-//        -> Modo mais "manual"
-//        val categories = mutableListOf<CategoryItem>()
-//
-//        for (category in response) {
-//            categories.add(CategoryItem(category))
-//        }
-//        view.showCategories(categories)
-
-//        -> Utilizando map
-//        val categories = response.map {
-//            category -> CategoryItem(category)
-//        }
-//        view.showCategories(categories)
-
-        val categories = response.map {CategoryItem(it)}
+    override fun onSuccess(response: List<String>) {
+        val categories = response.map {Category(it, 0xFFFF0000)}
         view.showCategories(categories)
+    }
+
+    override fun onError(error: String) {
+        view.showError(error)
     }
 
     override fun onComplete() {

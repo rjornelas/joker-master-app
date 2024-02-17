@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xwray.groupie.GroupieAdapter
 import rjornelas.tutorial.jokerappdev.data.CategoryRemoteDataSource
+import rjornelas.tutorial.jokerappdev.model.Category
 import rjornelas.tutorial.jokerappdev.presentation.HomePresenter
 import rjornelas.tutorial.jokerappdev.view.CategoryItem
 
@@ -47,7 +49,8 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = adapter
     }
 
-    fun showCategories(categories: List<CategoryItem>) {
+    fun showCategories(response: List<Category>) {
+        val categories = response.map { CategoryItem(it) }
         adapter.addAll(categories)
         adapter.notifyDataSetChanged()
     }
@@ -58,5 +61,9 @@ class HomeFragment : Fragment() {
 
     fun hideProgress() {
         progressBar.visibility = View.GONE
+    }
+
+    fun showError(errorMessage: String) {
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
     }
 }
