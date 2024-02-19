@@ -6,11 +6,11 @@ import retrofit2.Response
 import rjornelas.tutorial.jokerappdev.model.Joke
 import java.lang.RuntimeException
 
-class JokeRemoteDataSource {
-    fun findByCategory(categoryName: String, callBack: JokeCallBack) {
+class JokeDayRemoteDataSource {
+    fun findRandom(callBack: JokeCallBack) {
         HTTPClient.retrofit()
             .create(ChuckNorrisAPI::class.java)
-            .findJoke(categoryName)
+            .findJoke()
             .enqueue(object : Callback<Joke> {
                 override fun onResponse(
                     call: Call<Joke>,

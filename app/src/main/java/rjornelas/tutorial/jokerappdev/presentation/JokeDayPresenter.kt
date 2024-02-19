@@ -1,14 +1,15 @@
 package rjornelas.tutorial.jokerappdev.presentation
 
-import rjornelas.tutorial.jokerappdev.data.CategoryRemoteDataSource
 import rjornelas.tutorial.jokerappdev.data.JokeCallBack
+import rjornelas.tutorial.jokerappdev.data.JokeDayRemoteDataSource
 import rjornelas.tutorial.jokerappdev.data.JokeRemoteDataSource
 import rjornelas.tutorial.jokerappdev.model.Joke
+import rjornelas.tutorial.jokerappdev.view.JokeDayFragment
 import rjornelas.tutorial.jokerappdev.view.JokeFragment
 
-class JokerPresenter(
-    private val view: JokeFragment,
-    private val dataSource: JokeRemoteDataSource = JokeRemoteDataSource()
+class JokeDayPresenter(
+    private val view: JokeDayFragment,
+    private val dataSource: JokeDayRemoteDataSource = JokeDayRemoteDataSource()
 ) : JokeCallBack{
 
     override fun onSuccess(response: Joke) {
@@ -23,9 +24,9 @@ class JokerPresenter(
         view.hideProgress()
     }
 
-    fun findByCategory(categoryName: String){
+    fun findRandom(){
         view.showProgress()
-        dataSource.findByCategory(categoryName, this)
+        dataSource.findRandom(this)
     }
 
 }

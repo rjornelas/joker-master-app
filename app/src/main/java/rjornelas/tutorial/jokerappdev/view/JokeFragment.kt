@@ -14,7 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 import rjornelas.tutorial.jokerappdev.R
 import rjornelas.tutorial.jokerappdev.model.Joke
-import rjornelas.tutorial.jokerappdev.presentation.JokerPresenter
+import rjornelas.tutorial.jokerappdev.presentation.JokePresenter
 
 class JokeFragment : Fragment() {
 
@@ -25,12 +25,12 @@ class JokeFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var textView: TextView
     private lateinit var imageView: ImageView
-    private lateinit var jokerPresenter: JokerPresenter
+    private lateinit var jokePresenter: JokePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        jokerPresenter = JokerPresenter(this)
+        jokePresenter = JokePresenter(this)
     }
 
     override fun onCreateView(
@@ -51,10 +51,10 @@ class JokeFragment : Fragment() {
             textView = view.findViewById(R.id.tv_joke)
             imageView = view.findViewById(R.id.img_joke)
 
-            jokerPresenter.findByCategory(categoryName)
+            jokePresenter.findByCategory(categoryName)
 
             view.findViewById<FloatingActionButton>(R.id.fab_refresh).setOnClickListener{
-                jokerPresenter.findByCategory(categoryName)
+                jokePresenter.findByCategory(categoryName)
             }
         }
     }
