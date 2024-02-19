@@ -1,4 +1,4 @@
-package rjornelas.tutorial.jokerappdev
+package rjornelas.tutorial.jokerappdev.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +11,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import rjornelas.tutorial.jokerappdev.R
 
 class MainActivity : AppCompatActivity() {
 

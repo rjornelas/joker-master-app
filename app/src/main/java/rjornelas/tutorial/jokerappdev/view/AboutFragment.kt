@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import rjornelas.tutorial.jokerappdev.BuildConfig
 import rjornelas.tutorial.jokerappdev.R
 
 class AboutFragment : Fragment() {
@@ -15,5 +17,10 @@ class AboutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_about, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.findViewById<TextView>(R.id.tv_version).text = getString(R.string.build_version, BuildConfig.VERSION_NAME)
     }
 }
