@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xwray.groupie.GroupieAdapter
@@ -14,6 +15,7 @@ import rjornelas.tutorial.jokerappdev.data.CategoryRemoteDataSource
 import rjornelas.tutorial.jokerappdev.model.Category
 import rjornelas.tutorial.jokerappdev.presentation.HomePresenter
 import rjornelas.tutorial.jokerappdev.view.CategoryItem
+import rjornelas.tutorial.jokerappdev.view.JokeFragment.Companion.CATEGORY_KEY
 
 class HomeFragment : Fragment() {
 
@@ -44,9 +46,19 @@ class HomeFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_main)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        presenter.findAllCategories()
+        if(adapter.itemCount == 0){
+            presenter.findAllCategories()
+        }
 
         recyclerView.adapter = adapter
+
+        adapter.setOnItemClickListener{
+                item, _ ->
+            val bundle = Bundle()
+            val categoryName = (item as CategoryItem).category.name
+            bundle.putString(CATEGORY_KEY, categoryName)
+            findNavController().navigate(R.id.action_nav_home_to_nav_joke, bundle)
+        }
     }
 
     fun showCategories(response: List<Category>) {
