@@ -1,4 +1,4 @@
-package rjornelas.tutorial.jokerappdev
+package rjornelas.tutorial.jokerappdev.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +11,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xwray.groupie.GroupieAdapter
+import rjornelas.tutorial.jokerappdev.R
 import rjornelas.tutorial.jokerappdev.data.CategoryRemoteDataSource
 import rjornelas.tutorial.jokerappdev.model.Category
 import rjornelas.tutorial.jokerappdev.presentation.HomePresenter
-import rjornelas.tutorial.jokerappdev.view.CategoryItem
 import rjornelas.tutorial.jokerappdev.view.JokeFragment.Companion.CATEGORY_KEY
 
 class HomeFragment : Fragment() {

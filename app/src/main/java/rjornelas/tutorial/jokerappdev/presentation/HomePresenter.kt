@@ -1,12 +1,10 @@
 package rjornelas.tutorial.jokerappdev.presentation
 
 import android.graphics.Color
-import android.widget.Toast
-import rjornelas.tutorial.jokerappdev.HomeFragment
+import rjornelas.tutorial.jokerappdev.view.HomeFragment
 import rjornelas.tutorial.jokerappdev.data.CategoryRemoteDataSource
 import rjornelas.tutorial.jokerappdev.data.ListCategoryCallBack
 import rjornelas.tutorial.jokerappdev.model.Category
-import rjornelas.tutorial.jokerappdev.view.CategoryItem
 
 class HomePresenter(
     private val view: HomeFragment,
